@@ -10,9 +10,26 @@ function SpicyFoodList() {
     const newFoodArray =[...foods, newFood]
     setFoods(newFoodArray)
   }
+  function handleClick(id){
+    // increament heat level using .map and spread operator
+    
+    // const newFoodArray = foods.filter((food) => food.id !== id);
+    const newFoodArray = foods.map((food) => {
+      if (food.id === id) {
+        return {
+          ...food,
+          heatLevel: food.heatLevel + 1,
+        };
+      } else {
+        return food;
+      }
+    });
+    setFoods(newFoodArray);
+
+  }
 
   const foodList = foods.map((food) => (
-    <li key={food.id}>
+    <li key={food.id} onClick={()=> handleClick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
